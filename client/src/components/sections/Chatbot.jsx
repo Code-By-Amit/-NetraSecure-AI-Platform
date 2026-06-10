@@ -1,34 +1,16 @@
-
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Loader2, X, Minus, MessageSquareCode, ChevronUp } from 'lucide-react';
+import { Send, Bot, User, Loader2, X, Minus, ChevronUp } from 'lucide-react';
 import { useChatbot } from '../../hooks/useChatbot';
 
 const SUGGESTIONS = [
-  {
-    label: '🔐 Password Security',
-    text: 'How can I secure my passwords?'
-  },
-  {
-    label: '🎣 Phishing Protection',
-    text: 'How do I identify phishing emails?'
-  },
-  {
-    label: '🛡️ Malware Defense',
-    text: 'How can I protect against malware?'
-  },
-  {
-    label: '📡 Network Security',
-    text: 'How can I secure my WiFi network?'
-  },
-  {
-    label: '🔍 Data Breach Check',
-    text: 'What should I do after a data breach?'
-  },
-  {
-    label: '🤖 Deepfake Detection',
-    text: 'How can I detect deepfakes?'
-  }
+  { label: '🔐 Password Security', text: 'How can I secure my passwords?' },
+  { label: '🎣 Phishing Protection', text: 'How do I identify phishing emails?' },
+  { label: '🛡️ Malware Defense', text: 'How can I protect against malware?' },
+  { label: '📡 Network Security', text: 'How can I secure my WiFi network?' },
+  { label: '🔍 Data Breach Check', text: 'What should I do after a data breach?' },
+  { label: '🤖 Deepfake Detection', text: 'How can I detect deepfakes?' }
 ];
+
 export default function Chatbot({ isOpen, setIsOpen }) {
   const { messages, loading, sendMessage } = useChatbot();
   const [input, setInput] = useState('');
@@ -71,12 +53,12 @@ export default function Chatbot({ isOpen, setIsOpen }) {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-13 right-13 z-50 group"
+        className="fixed bottom-5 right-5 z-50 group"
         aria-label="Open AI Chatbot"
       >
-        <div className="relative w-25 h-18 rounded-full bg-[#1E2128] border-2 border-[#00C8FF]/40 hover:border-[#00C8FF]/80 flex items-center justify-center shadow-2xl hover:scale-105 transition-all duration-200">
+        <div className="relative w-14 h-14 rounded-full bg-[#1E2128] border-2 border-[#00C8FF]/40 hover:border-[#00C8FF]/80 flex items-center justify-center shadow-2xl hover:scale-105 transition-all duration-200">
           <Bot className="w-7 h-7 text-[#00C8FF]" />
-          <span className="absolute top-0 right-0 w-4 h-4 bg-[#FF6B2B] rounded-full border-2 border-[#0D0F14] animate-pulse" />
+          <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-[#FF6B2B] rounded-full border-2 border-[#0D0F14] animate-pulse" />
         </div>
       </button>
     );
@@ -86,7 +68,7 @@ export default function Chatbot({ isOpen, setIsOpen }) {
   if (isMinimized) {
     return (
       <div
-        className="fixed bottom-13 right-13 z-50 w-80 bg-[#1E2128] rounded-2xl border border-[#00C8FF]/25 p-3 flex items-center justify-between cursor-pointer hover:border-[#00C8FF]/50 transition-colors shadow-2xl"
+        className="fixed bottom-5 right-5 z-50 w-[calc(100vw-2.5rem)] sm:w-80 bg-[#1E2128] rounded-2xl border border-[#00C8FF]/25 p-3 flex items-center justify-between cursor-pointer hover:border-[#00C8FF]/50 transition-colors shadow-2xl"
         onClick={() => setIsMinimized(false)}
       >
         <div className="flex items-center gap-3">
@@ -103,11 +85,11 @@ export default function Chatbot({ isOpen, setIsOpen }) {
     );
   }
 
-  // Full chat window
+  // Full chat window - larger on desktop
   return (
-    <div className="fixed bottom-13 right-13 z-50 w-139  max-w-[calc(100vw-2rem)]">
-      <div className="flex flex-col rounded-2xl overflow-hidden h-200 shadow-2xl border border-[#00C8FF]/25 bg-[#161920]">
-
+    <div className="fixed bottom-0 right-0 md:bottom-5 md:right-5 z-50 w-full md:w-[650px] lg:w-[750px] h-[100dvh] md:h-[850px] md:max-h-[95vh] animate-fadeIn">
+      <div className="flex flex-col rounded-none md:rounded-2xl overflow-hidden shadow-2xl border-0 md:border border-[#00C8FF]/25 bg-[#161920] h-full">
+        
         {/* Header */}
         <div className="flex-shrink-0 bg-[#1E2128] border-b border-white/5 px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -139,8 +121,7 @@ export default function Chatbot({ isOpen, setIsOpen }) {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4  bg-[#0D0F14]/40 scrollbar-thin scrollbar-thumb-white/10">
-
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#0D0F14]/40 scrollbar-thin scrollbar-thumb-white/10">
           {/* Welcome message */}
           <div className="flex gap-2.5 items-end">
             <div className="w-7 h-7 rounded-full bg-[#00C8FF]/10 border border-[#00C8FF]/30 flex items-center justify-center flex-shrink-0">
@@ -148,20 +129,20 @@ export default function Chatbot({ isOpen, setIsOpen }) {
             </div>
             <div>
               <div className="max-w-[80%] bg-[#1E2128] border border-white/5 text-[#cbd5e1] text-sm px-4 py-3 rounded-2xl rounded-bl-md leading-relaxed">
-                Hi there! 👋 I'm the NetraSecure AI assistant. I can help you with security audits, threat detection, vulnerability reports, and more. What can I help you with?
+                Hi there! I'm the NetraSecure AI assistant. I can help you with security audits, threat detection, vulnerability reports, and more. What can I help you with?
               </div>
               <p className="text-[11px] text-gray-600 mt-1 ml-1">{now}</p>
             </div>
           </div>
 
-          {/* Quick suggestion chips */}
+          {/* Quick suggestion chips - horizontally scrollable on mobile */}
           {showSuggestions && (
-            <div className="flex flex-wrap gap-2 pl-9">
+            <div className="flex flex-nowrap overflow-x-auto gap-2 pl-9 pb-2">
               {SUGGESTIONS.map((s) => (
                 <button
                   key={s.text}
                   onClick={() => handleSend(s.text)}
-                  className="px-3 py-1.5 text-xs rounded-full bg-[#00C8FF]/8 border border-[#00C8FF]/20 text-[#00C8FF] hover:bg-[#00C8FF]/15 transition-colors"
+                  className="px-3 py-1.5 text-xs rounded-full bg-[#00C8FF]/8 border border-[#00C8FF]/20 text-[#00C8FF] hover:bg-[#00C8FF]/15 transition-colors whitespace-nowrap flex-shrink-0"
                 >
                   {s.label}
                 </button>
@@ -169,43 +150,27 @@ export default function Chatbot({ isOpen, setIsOpen }) {
             </div>
           )}
 
+          {/* Messages */}
           {messages.map((msg, idx) => (
             <div
               key={idx}
-              className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"
-                }`}
+              className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
-              {/* Bot Avatar */}
               {msg.role === "assistant" && (
                 <div className="w-9 h-9 rounded-full bg-[#00C8FF]/10 border border-[#00C8FF]/20 flex items-center justify-center flex-shrink-0 mt-1">
                   <Bot className="w-4 h-4 text-[#00C8FF]" />
                 </div>
               )}
-
-              <div
-                className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"
-                  }`}
-              >
-                <div
-                  className={`
-          px-4 py-3 rounded-2xl text-sm leading-relaxed
-          max-w-[85%] sm:max-w-md break-words
-          transition-all duration-200
-          ${msg.role === "user"
-                      ? "bg-gradient-to-r from-[#00C8FF] to-[#00AEEF] text-white rounded-br-md shadow-lg shadow-cyan-500/10"
-                      : "bg-[#171A21]/80 backdrop-blur-md border border-white/10 text-slate-200 rounded-bl-md shadow-lg"
-                    }
-        `}
-                >
+              <div className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
+                <div className={`px-4 py-3 rounded-2xl text-sm leading-relaxed max-w-[85%] sm:max-w-md break-words transition-all duration-200 ${
+                  msg.role === "user"
+                    ? "bg-gradient-to-r from-[#00C8FF] to-[#00AEEF] text-white rounded-br-md shadow-lg shadow-cyan-500/10"
+                    : "bg-[#171A21]/80 backdrop-blur-md border border-white/10 text-slate-200 rounded-bl-md shadow-lg"
+                }`}>
                   {msg.content}
                 </div>
-
-                <span className="text-[10px] text-gray-500 mt-1 px-2">
-                  {msg.timestamp}
-                </span>
+                <span className="text-[10px] text-gray-500 mt-1 px-2">{msg.timestamp || now}</span>
               </div>
-
-              {/* User Avatar */}
               {msg.role === "user" && (
                 <div className="w-9 h-9 rounded-full bg-[#FF6B2B]/10 border border-[#FF6B2B]/20 flex items-center justify-center flex-shrink-0 mt-1">
                   <User className="w-4 h-4 text-[#FF6B2B]" />
@@ -223,11 +188,7 @@ export default function Chatbot({ isOpen, setIsOpen }) {
               <div className="bg-[#1E2128] border border-white/5 px-4 py-3.5 rounded-2xl rounded-bl-md">
                 <div className="flex gap-1.5 items-center">
                   {[0, 150, 300].map((delay) => (
-                    <span
-                      key={delay}
-                      className="w-2 h-2 rounded-full bg-[#00C8FF]/60 animate-bounce"
-                      style={{ animationDelay: `${delay}ms` }}
-                    />
+                    <span key={delay} className="w-2 h-2 rounded-full bg-[#00C8FF]/60 animate-bounce" style={{ animationDelay: `${delay}ms` }} />
                   ))}
                 </div>
               </div>
@@ -247,7 +208,6 @@ export default function Chatbot({ isOpen, setIsOpen }) {
               placeholder="Ask about security, threats, audits…"
               rows={1}
               className="flex-1 overflow-y-hidden bg-[#0D0F14] border border-[#00C8FF]/18 focus:border-[#00C8FF]/50 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-gray-600 resize-none focus:outline-none transition-colors min-h-[44px] max-h-[120px]"
-              style={{ lineHeight: '1.5' }}
             />
             <button
               onClick={() => handleSend()}
