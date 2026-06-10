@@ -1,0 +1,116 @@
+
+@import "tailwindcss";
+
+/* ✅ Custom Theme Configuration - No config file needed! */
+@theme {
+  /* Cyberpunk Colors */
+  --color-neon-blue: #00D4FF;
+  --color-neon-orange: #FF7A00;
+  --color-dark-bg: #0A0C10;
+  --color-dark-card: #11131F;
+  --color-glass-border: rgba(0, 212, 255, 0.2);
+  
+  /* Fonts */
+  --font-family-sans: "Inter", system-ui, sans-serif;
+  
+  /* Animations */
+  --animate-glow-pulse: glowPulse 2s infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Keyframes */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 5px #00D4FF, 0 0 10px #00D4FF; }
+  50% { box-shadow: 0 0 20px #00D4FF, 0 0 30px #FF7A00; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* ✅ Base Styles */
+@layer base {
+  body {
+    background-color: var(--color-dark-bg);
+    color: white;
+    font-family: var(--font-family-sans);
+    background-image: radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 40%);
+  }
+}
+
+/* ✅ Custom Components (Alternative to Framer Motion) */
+@layer components {
+  .glass-card {
+    background-color: var(--color-dark-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .glass-card:hover {
+    border-color: var(--color-neon-blue);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    transform: translateY(-4px);
+  }
+  
+  .cyber-grid {
+    background-image: 
+      linear-gradient(to right, rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  /* CSS-only fade-in animation (no Framer Motion) */
+  .fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Hover glow effect */
+  .glow-border {
+    transition: all 0.3s ease;
+  }
+  .glow-border:hover {
+    border-color: var(--color-neon-blue);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  }
+}
+
+/* ✅ Utility Classes for neon text */
+.neon-text {
+  background: linear-gradient(135deg, #00D4FF 0%, #FF7A00 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Add or verify these keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
