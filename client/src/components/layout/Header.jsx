@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Shield, Cpu, Bot, Scan, Mail, Sparkles, ChevronRight } from 'lucide-react';
 
-export default function Header({setIsChatbotOpen}) {
+export default function Header({ setIsChatbotOpen }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -70,7 +70,7 @@ export default function Header({setIsChatbotOpen}) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+       (scrolled || isOpen)
           ? 'bg-dark-bg/90 backdrop-blur-xl border-b border-neon-blue/20 shadow-2xl shadow-neon-blue/5'
           : 'bg-transparent backdrop-blur-none border-b border-transparent'
       }`}
@@ -93,7 +93,7 @@ export default function Header({setIsChatbotOpen}) {
             </span>
           </button>
 
-          {/* Desktop Navigation - visible from tablet landscape upwards */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-3 lg:gap-6 xl:gap-8">
             {navItems.map((item) => (
               <button
@@ -117,7 +117,7 @@ export default function Header({setIsChatbotOpen}) {
             </button>
           </nav>
 
-          {/* Mobile menu button – visible only on small tablets and phones */}
+          {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden relative w-10 h-10 rounded-full bg-dark-card/80 backdrop-blur-sm border border-gray-800 flex items-center justify-center hover:border-neon-blue/50 transition-all duration-300 active:scale-95"
@@ -127,13 +127,17 @@ export default function Header({setIsChatbotOpen}) {
           </button>
         </div>
 
-        {/* Mobile Navigation Panel – only for screens below md (768px) */}
+        {/* Mobile Navigation Panel - full screen below header */}
         <div
-          className={`md:hidden fixed inset-x-0 top-14 sm:top-16 bottom-0 bg-dark-bg/95 backdrop-blur-lg transition-all duration-400 ease-in-out z-40 ${
+          className={`md:hidden fixed left-0 right-0 bg-dark-bg/95 backdrop-blur-lg transition-all duration-400 ease-in-out z-40 overflow-y-auto ${
             isOpen ? 'translate-x-0 opacity-100 visible' : 'translate-x-full opacity-0 invisible'
           }`}
+          style={{
+            top: '88px',
+            height: 'calc(100dvh - 56px)',
+          }}
         >
-          <div className="flex flex-col h-full overflow-y-auto pb-20">
+          <div className="flex flex-col h-full pb-20">
             <div className="py-4 px-4 space-y-1">
               {navItems.map((item) => (
                 <button
@@ -150,7 +154,11 @@ export default function Header({setIsChatbotOpen}) {
               ))}
               <div className="pt-4 px-4">
                 <button
-                  onClick={() => setIsChatbotOpen((prev) => !prev)}
+                  onClick={() => {
+                    setIsChatbotOpen((prev) => !prev);
+                    setIsOpen(false);
+                    document.body.style.overflow = 'auto';
+                  }}
                   className="w-full py-4 bg-gradient-to-r from-neon-blue/10 to-neon-orange/10 border border-neon-blue/30 rounded-xl text-neon-blue font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition-all text-base"
                 >
                   <Sparkles className="w-5 h-5" /> Try AI Assistant
@@ -158,7 +166,7 @@ export default function Header({setIsChatbotOpen}) {
               </div>
             </div>
             <div className="mt-auto text-center text-xs text-gray-600 py-6">
-              <p>🔒 Secure AI assistant</p>
+              <p>Secure AI assistant</p>
             </div>
           </div>
         </div>
