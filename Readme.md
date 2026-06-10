@@ -4,8 +4,8 @@
 
 NetraSecure AI is a futuristic, responsive cybersecurity SaaS landing page and toolkit. It provides intelligent threat detection, real‑time URL scanning, an AI‑powered chatbot, and enterprise‑grade security insights — all wrapped in a premium dark‑theme UI.
 
-![Hero Preview]([https://via.placeholder.com/1200x600?text=NetraSecure+AI+Preview](https://netra-secure-ai-platform.vercel.app/laptop_preview.png))
-*(Replace with actual screenshot later)*
+![NetraSecure AI Preview](https://raw.githubusercontent.com/Code-By-Amit/-NetraSecure-AI-Platform/main/client/public/laptop_preview.png)
+
 
 ---
 
